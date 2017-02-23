@@ -1,0 +1,8 @@
+Package: TofuDoorbell
+Version: %VERSION_NUM
+Section: custom
+Priority: optional
+Architecture: armhf
+Essential: no
+Maintainer: dgrubb
+Description: Play an mp3 sample on detection of a door opening.
