@@ -21,7 +21,7 @@ Run the build.sh script under ./build to create an installable .deb
 repository. It's recommended to add a systemd unit configuration of the 
 template:
 
-[Unit]
+```[Unit]
 Description=Tofu Doorbell
 
 [Service]
@@ -32,4 +32,4 @@ Restart=always
 
 [Install]
 WantedBy=default.target
-
+```
