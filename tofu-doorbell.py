@@ -14,10 +14,19 @@ import sys
 import time
 
 # Tofu imports
-from tofuutils import LOG
 import tofuversion
 
 MODULE = "Tofu Doorbell"
+LOG = logging.getLogger(MODULE)
+LOG_FORMAT = "%(asctime)s %(name)-12s %(levelname)-8s %(message)s"
+LOG_LEVELS = {
+    "debug":    logging.DEBUG,
+    "info":     logging.INFO,
+    "warning":  logging.WARNING,
+    "error":    logging.ERROR, 
+    "critical": logging.CRITICAL
+}
+LOG_LEVEL = LOG_LEVELS["info"] # Default, may be overwritten by user
 USAGE = """
     """ + MODULE + """ (v""" + tofuversion.TOFU + """) - A utility for
     determining if a door has been opened and plays a music sample.
@@ -38,6 +47,7 @@ USAGE = """
 """
 
 def parseArgs(argv):
+    logLevel = LOG_LEVEL
     try:
         opts, args = getopt.getopt(
             argv,
@@ -54,10 +64,12 @@ def parseArgs(argv):
             print USAGE
             sys.exit(-1)
         elif opt in ("-l", "--log"):
-            if arg not in LOG.LEVELS:
+            if arg not in LOG_LEVELS:
                 print USAGE
                 sys.exit(-1)
-            LOG.setLevel(arg)
+            else:
+                logLevel = LOG_LEVELS[arg]
+    logging.basicConfig(format=LOG_FORMAT, level=logLevel)
 
 def main(argv):
     parseArgs(argv)
