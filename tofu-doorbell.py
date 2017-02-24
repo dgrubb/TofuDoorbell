@@ -19,7 +19,7 @@ import tofuversion
 
 MODULE = "Tofu Doorbell"
 LOG = logging.getLogger(MODULE)
-LOG_FORMAT = "%(asctime)s %(name)-12s %(levelname)-8s %(message)s"
+LOG_FORMAT = "[ %(asctime)s | %(name)-12s | %(levelname)-8s ] %(message)s"
 LOG_LEVELS = {
     "debug":    logging.DEBUG,
     "info":     logging.INFO,
@@ -74,7 +74,7 @@ def parseArgs(argv):
 
 def main(argv):
     parseArgs(argv)
-    logging.info("Tofu Doorbell initialised")
+    LOG.info("Tofu Doorbell initialised")
     while True:
         time.sleep(1)
 
