@@ -5,6 +5,18 @@
 # Provides audio playback functionality.
 
 # System modules
+import logging
+import os
 
-class TofuAudioPlayer():
-    pass
+MODULE = "Tofu Audio"
+LOG = logging.getLogger(MODULE)
+
+def scanDirectoryForMusicFiles(directory):
+    musicFiles = []
+    for root, dirs, files in os.walk(directory):
+        for file in files:
+            if file.endswith(".mp3"):
+                logging.debug("{0}".format(file))
+                musicFiles.append(file)
+    logging.info("Found {0} .mp3 files in {1}".format(len(musicFiles), directory))
+    return musicFiles

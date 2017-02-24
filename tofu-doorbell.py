@@ -14,6 +14,7 @@ import sys
 import time
 
 # Tofu imports
+import tofuaudio
 import tofuversion
 
 MODULE = "Tofu Doorbell"
@@ -73,6 +74,7 @@ def parseArgs(argv):
 
 def main(argv):
     parseArgs(argv)
+    logging.info("Tofu Doorbell initialised")
     while True:
         time.sleep(1)
 
