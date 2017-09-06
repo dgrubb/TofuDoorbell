@@ -21,7 +21,7 @@ readonly VERSION="$MAJOR_VERSION.$MINOR_VERSION.$PACKAGE_VERSION"
 # Build configurations
 readonly STAGING_DIR=`pwd`
 readonly BUILD_DIR="$STAGING_DIR/${PROJECT}_${VERSION}" # Equivalent to / on target
-readonly INSTALL_DIR="$BUILD_DIR/opt/tofu-doorbell"
+readonly INSTALL_DIR="$BUILD_DIR/opt/tofu"
 readonly CONTROL_INSTALL_DIR="$BUILD_DIR/DEBIAN"
 
 # Build files
@@ -102,7 +102,6 @@ install_source_files() {
     chmod +x $INSTALL_DIR/$APPLICATION_FILE
 
     # Install directories of content
-    cp -vr $TOFUSPI_DIR $INSTALL_DIR
     cp -vr $TOFUVERSION_DIR $INSTALL_DIR
 
     # Ammend version numbers
