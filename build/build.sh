@@ -34,7 +34,7 @@ readonly APPLICATION_PATH="$SOURCE_DIR/$APPLICATION_FILE"
 readonly VERSION_FILE="$INSTALL_DIR/tofuversion/tofuversion.py"
 
 # Source directories
-readonly TOFUSPI_DIR="$SOURCE_DIR/tofuspi"
+readonly TOFUAUDIO_DIR="$SOURCE_DIR/tofuaudio"
 readonly TOFUVERSION_DIR="$SOURCE_DIR/tofuversion"
 
 ###############################################################################
@@ -102,6 +102,7 @@ install_source_files() {
     chmod +x $INSTALL_DIR/$APPLICATION_FILE
 
     # Install directories of content
+    cp -vr $TOFUAUDIO_DIR $INSTALL_DIR
     cp -vr $TOFUVERSION_DIR $INSTALL_DIR
 
     # Ammend version numbers

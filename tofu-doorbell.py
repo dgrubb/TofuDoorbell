@@ -17,6 +17,8 @@ import time
 import tofuaudio
 import tofuversion
 
+###############################################################################
+
 MODULE = "Tofu Doorbell"
 LOG = logging.getLogger(MODULE)
 LOG_FORMAT = "[ %(asctime)s | %(name)-12s | %(levelname)-8s ] %(message)s"
@@ -47,13 +49,15 @@ USAGE = """
     -h, --help  Print usage.
 """
 
+###############################################################################
+
 def parseArgs(argv):
     logLevel = LOG_LEVEL
     try:
         opts, args = getopt.getopt(
             argv,
-            "l:h",
-            ["log=", "help"]
+            "l:d:h",
+            ["log=", "directory=", "help"]
         )
     except getopt.GetoptError as e:
         # We haven't instantiated LOG yet so default to basic print
@@ -74,7 +78,11 @@ def parseArgs(argv):
 
 def main(argv):
     parseArgs(argv)
-    LOG.info("Tofu Doorbell initialised")
+    LOG.info(
+        "Tofu Doorbell initialised, logging level: {0}".format(
+            logging.getLevelName(LOG.getEffectiveLevel())
+        )
+    )
     while True:
         time.sleep(1)
 

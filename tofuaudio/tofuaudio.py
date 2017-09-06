@@ -11,6 +11,10 @@ import os
 MODULE = "Tofu Audio"
 LOG = logging.getLogger(MODULE)
 
+###############################################################################
+# Worker functions
+###############################################################################
+
 def scanDirectoryForMusicFiles(directory):
     musicFiles = []
     for root, dirs, files in os.walk(directory):
@@ -20,3 +24,11 @@ def scanDirectoryForMusicFiles(directory):
                 musicFiles.append(file)
     LOG.info("Found {0} .mp3 files in {1}".format(len(musicFiles), directory))
     return musicFiles
+
+###############################################################################
+# Classes
+###############################################################################
+
+class TofuAudioPlayer():
+    pass
+
