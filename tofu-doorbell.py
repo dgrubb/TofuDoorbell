@@ -20,13 +20,14 @@ import tofuversion
 ###############################################################################
 
 MODULE = "Tofu Doorbell"
+MUSIC_DIR = "./"
 LOG = logging.getLogger(MODULE)
-LOG_FORMAT = "[ %(asctime)s | %(name)-12s | %(levelname)-8s ] %(message)s"
+LOG_FORMAT = "[ %(asctime)s | %(name)-13s | %(levelname)-8s ] %(message)s"
 LOG_LEVELS = {
     "debug":    logging.DEBUG,
     "info":     logging.INFO,
     "warning":  logging.WARNING,
-    "error":    logging.ERROR, 
+    "error":    logging.ERROR,
     "critical": logging.CRITICAL
 }
 LOG_LEVEL = LOG_LEVELS["info"] # Default, may be overwritten by user
@@ -36,22 +37,29 @@ USAGE = """
 
     Usage:
 
-    $ ./tofu-doorbell.py -l <logging level>
+    $ ./tofu-doorbell.py -l <logging level> -d <audio directory>
 
-    -l, --log   Log level, options:
+    -l, --log            Log level, options:
 
-                    debug
-                    info
-                    warning
-                    error
-                    critical
+                            debug
+                            info
+                            warning
+                            error
+                            critical
 
-    -h, --help  Print usage.
+    -d, --directory     Directory where audio samples are stored. Relative
+                        and absolute paths are valid, e.g.,:
+
+                            -d ./music
+                            -d /opt/somedir/audio
+
+    -h, --help          Print usage.
 """
 
 ###############################################################################
 
 def parseArgs(argv):
+    global MUSIC_DIR
     logLevel = LOG_LEVEL
     try:
         opts, args = getopt.getopt(
@@ -74,6 +82,8 @@ def parseArgs(argv):
                 sys.exit(-1)
             else:
                 logLevel = LOG_LEVELS[arg]
+        elif opt in ("-d", "--directory"):
+            MUSIC_DIR = arg
     logging.basicConfig(format=LOG_FORMAT, level=logLevel)
 
 def main(argv):
@@ -83,6 +93,17 @@ def main(argv):
             logging.getLevelName(LOG.getEffectiveLevel())
         )
     )
+
+    player = tofuaudio.TofuAudioPlayer()
+    if not player:
+        LOG.error("Failed to instantiate an audio player")
+        return
+
+    musicList = tofuaudio.scanDirectoryForMusicFiles(MUSIC_DIR)
+    if not musicList:
+        LOG.error("Failed to find audio files")
+        return
+
     while True:
         time.sleep(1)
 

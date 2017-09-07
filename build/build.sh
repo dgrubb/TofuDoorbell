@@ -35,6 +35,7 @@ readonly VERSION_FILE="$INSTALL_DIR/tofuversion/tofuversion.py"
 
 # Source directories
 readonly TOFUAUDIO_DIR="$SOURCE_DIR/tofuaudio"
+readonly TOFUGPIO_DIR="$SOURCE_DIR/tofugpio"
 readonly TOFUVERSION_DIR="$SOURCE_DIR/tofuversion"
 
 ###############################################################################
@@ -103,6 +104,7 @@ install_source_files() {
 
     # Install directories of content
     cp -vr $TOFUAUDIO_DIR $INSTALL_DIR
+    cp -vr $TOFUGPIO_DIR $INSTALL_DIR
     cp -vr $TOFUVERSION_DIR $INSTALL_DIR
 
     # Ammend version numbers
