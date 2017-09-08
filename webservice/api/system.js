@@ -27,7 +27,6 @@ router.use(function(req, res, next) {
  * Public API
  *****************************************************************************/
 
-
 /**
  * Reboots the platform.
  *
@@ -39,7 +38,7 @@ router.get("/reboot", function(req, res, next) {
     log.debug("GET /api/system/reboot");
     exec("shutdown -r now", function(err, stdout, stderr) {
         if (err) {
-            return res.status(httpCodes.INTERNAL_SERVER_ERROR);
+            return res.status(httpCodes.INTERNAL_SERVER_ERROR).send();
         }
         return res.status(httpCodes.OK).send();
     });
@@ -56,7 +55,7 @@ router.get("/restart_service", function(req, res, next) {
     log.debug("GET /api/system/restart_service");
     exec("systemctl restart doorbell", function(err, stdout, stderr) {
         if (err) {
-            return res.status(httpCodes.INTERNAL_SERVER_ERROR);
+            return res.status(httpCodes.INTERNAL_SERVER_ERROR).send();
         }
         return res.status(httpCodes.OK).send();
     });
