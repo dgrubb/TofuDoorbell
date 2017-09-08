@@ -16,7 +16,7 @@ var Network = (function() {
             method: type,
             processData: true,
             complete: callback,
-            timeout: 8000
+            timeout: 3000
         });
     }
 

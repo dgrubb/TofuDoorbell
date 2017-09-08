@@ -2,19 +2,54 @@
 <html>
 <head>
     <title>Tofu Web Service</title>
-    <link rel="icon" type="image/png" href="./images/favicon.png" />
     <!-- Stylesheets -->
     <link rel="stylesheet" href="./style/bootstrap.css" />
     <link rel="stylesheet" href="./style/tofu.css" />
     <!-- Third party JavaScript -->
-    <script type="text/javascript" src="./js/third-party/bootstrap.js"></script>
     <script type="text/javascript" src="./js/third-party/jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="./js/third-party/bootstrap.js"></script>
     <!-- Application Javascript -->
     <script type="text/javascript" src="./js/network.js"></script>
     <script type="text/javascript" src="./js/api.js"></script>
     <script type="text/javascript" src="./js/main.js"></script>
 </head>
 <body>
+
+    <div id="top_logo" class="top-logo">
+        <img src="./images/tofu-logo.png" />
+    </div>
+
+    <br>
+
+    <div id="control_panel" class="control-panel">
+        Upload new audio samples:
+        <br><br>
+        <form method="post" action="file/upload" enctype="multipart/form-data">
+            <input name="fileUploadList[]" id="fileUploadList" type="file" multiple="" />
+            <br>
+            <div id="upload_controls" class="upload-controls">
+                <button type="submit" id="submit_upload" class="btn btn-primary">Submit</button>
+                <button type="button" id="cancel_upload" class="btn btn-default">Cancel</button>
+            </div>
+        </form>
+        <hr>
+        <div id="system_controls" class="system-controls">
+            <button type="button" id="reboot_system" class="btn btn-default">Reboot</button>
+            <button type="button" id="restart_service" class="btn btn-default">Restart service</button>
+        </div>
+    </div>
+
+    <br>
+
+    <div id="file_list" class="file-list">
+        test content
+    </div>
+
+    <!--
+        After initialising the rest of our JavaScript and all page 
+        elements attach our callbacks and event handlers.
+    -->
+    <script type="text/javascript" src="./js/input.js"></script>
 
 </body>
 </html>

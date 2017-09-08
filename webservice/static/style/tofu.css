@@ -1,0 +1,17 @@
+html {
+    height: 100%;
+}
+
+body {
+    font-family: "Helvetica", arial, sans-serif;
+    background: radial-gradient(circle at top left, #1974bb, #a1def3);
+    padding: 1em;
+}
+
+.control-panel, .file-list {
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    border-radius: 1em;
+    padding: 1em;
+}
+
