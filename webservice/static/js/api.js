@@ -9,6 +9,24 @@
 var API = (function() {
     'use strict';
 
+    function deleteAudioFiles(files, callback) {
+        Network.get(
+            "/api/file/delete",
+            {
+                files: files
+            },
+            callback
+        );
+    }
+
+    function getAudioList(callback) {
+        Network.get(
+            "/api/file/getlist",
+            {},
+            callback
+        );
+    }
+
     function rebootSystem(callback) {
         Network.get(
             "/api/system/reboot",
@@ -41,6 +59,8 @@ var API = (function() {
     }
 
     var api = {
+        deleteAudioFiles: deleteAudioFiles,
+        getAudioList: getAudioList,
         rebootSystem: rebootSystem,
         restartService: restartService,
         validateResponse: validateResponse
