@@ -37,7 +37,7 @@ var API = (function() {
 
     function restartService(callback) {
         Network.get(
-            "/api/system/restart",
+            "/api/system/restart_service",
             {},
             callback
         );

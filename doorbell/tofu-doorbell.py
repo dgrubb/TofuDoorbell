@@ -10,16 +10,19 @@
 # system imports
 import getopt
 import logging
+import signal
 import sys
 import time
 
 # Tofu imports
 import tofuaudio
+import tofugpio
 import tofuversion
 
 ###############################################################################
 
 MODULE = "Tofu Doorbell"
+DEFAULT_PIN = 32 # According to Pi header pinout, NOT BCM chip pinout
 MUSIC_DIR = "./"
 LOG = logging.getLogger(MODULE)
 LOG_FORMAT = "[ %(asctime)s | %(name)-13s | %(levelname)-8s ] %(message)s"
@@ -53,6 +56,8 @@ USAGE = """
                             -d ./music
                             -d /opt/somedir/audio
 
+    -p, --pin           Pin to use as input signal source (Default: 32)
+
     -h, --help          Print usage.
 """
 
@@ -60,6 +65,7 @@ USAGE = """
 
 def parseArgs(argv):
     global MUSIC_DIR
+    global DEFAULT_PIN
     logLevel = LOG_LEVEL
     try:
         opts, args = getopt.getopt(
@@ -84,6 +90,16 @@ def parseArgs(argv):
                 logLevel = LOG_LEVELS[arg]
         elif opt in ("-d", "--directory"):
             MUSIC_DIR = arg
+        elif opt in ("-p", "--pin"):
+            try:
+                pin = int(arg)
+            except:
+                print USAGE
+                sys.exit(-1)
+            if not togugpio.isValidPin(pin):
+                print USAGE
+                sys.exit(-1)
+            DEFAULT_PIN = pin
     logging.basicConfig(format=LOG_FORMAT, level=logLevel)
 
 def main(argv):
@@ -94,15 +110,28 @@ def main(argv):
         )
     )
 
-    player = tofuaudio.TofuAudioPlayer()
-    if not player:
-        LOG.error("Failed to instantiate an audio player")
-        return
-
     musicList = tofuaudio.scanDirectoryForMusicFiles(MUSIC_DIR)
     if not musicList:
         LOG.error("Failed to find audio files")
         return
+
+    player = tofuaudio.TofuAudioPlayer(musicList)
+    if not player:
+        LOG.error("Failed to instantiate an audio player")
+        return
+
+    LOG.info("Using pin [ {0} ] for input".format(DEFAULT_PIN))
+    tofugpio.setupPin(DEFAULT_PIN, player.playRandom)
+
+    # Release resources gracefully if forcibly killed
+    def signalHandler(signal, frame):
+        print "Caught signal ({0}), exiting ...".format(signal)
+        tofugpio.closeAllPins()
+        player.stop()
+        sys.exit(0)
+    signal.signal(signal.SIGINT, signalHandler)
+    signal.signal(signal.SIGQUIT, signalHandler)
+    signal.signal(signal.SIGTERM, signalHandler)
 
     while True:
         time.sleep(1)

@@ -7,6 +7,7 @@
 # System modules
 import logging
 import os
+from random import randint
 
 MODULE = "Tofu Audio"
 LOG = logging.getLogger(MODULE)
@@ -48,12 +49,14 @@ class TofuAudioPlayer():
         return self.playing
 
     def playRandom(self):
-        pass
+        play(randint(0, len(playlist)))
 
     def play(self, index):
-        if index > len(playlist):
+        if index < 0 or index > len(playlist):
             LOG.error("Requested index [ {0} ] outside playlist range.".format(index))
             return False
+        if playing:
+            self.stop()
 
     def stop(self):
         playing = False
