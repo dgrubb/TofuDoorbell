@@ -7,6 +7,7 @@
  */
 
 var winston = require("winston");
+var rightpad = require("right-pad");
 
 module.exports = new (winston.Logger)({
     transports: [
@@ -18,12 +19,16 @@ module.exports = new (winston.Logger)({
                     .replace(/\..+/, '');
             },
             formatter: function(options) {
+                var logLevel = options.level.toUpperCase();
                 return '[ ' + options.timestamp() + ' ]' +
-                    ' [ ' + options.level.toUpperCase() + ' ] ' +
+                    ' [ ' + rightpad(logLevel, 8, " ") + ' ] ' +
                     (options.message ? options.message : '') +
                     (options.meta && Object.keys(options.meta).length ?
                     '\n\t' + JSON.stringify(options.meta) :
                     '');
+            },
+            padRight: function(str, padStr) {
+                return (str + padStr).substring(0, padStr.length);
             }
         })
     ]
