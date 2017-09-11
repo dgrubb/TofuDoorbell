@@ -29,7 +29,7 @@ template:
 Description=Tofu Doorbell
 
 [Service]
-ExecStart=/usr/bin/python /opt/tofu-doorbell/tofu-doorbell.py
+ExecStart=/usr/bin/python /opt/tofu/tofu-doorbell.py
 ExecStop=/usr/bin/pkill -f tofu-doorbell.py
 WorkingDirectory=/opt/tofu-doorbell
 Restart=always
