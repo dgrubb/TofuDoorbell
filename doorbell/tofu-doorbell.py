@@ -105,9 +105,10 @@ def parseArgs(argv):
 def main(argv):
     parseArgs(argv)
     LOG.info(
-        "Tofu Doorbell initialised, logging level: {0}".format(
-            logging.getLevelName(LOG.getEffectiveLevel())
-        )
+        "Tofu Doorbell initialised, logging level: {0}".format(tofuversion.TOFU)
+    )
+    LOG.info("Logging level: {0}".format(
+        logging.getLevelName(LOG.getEffectiveLevel()))
     )
 
     musicList = tofuaudio.scanDirectoryForMusicFiles(MUSIC_DIR)
