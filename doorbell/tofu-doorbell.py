@@ -70,8 +70,8 @@ def parseArgs(argv):
     try:
         opts, args = getopt.getopt(
             argv,
-            "l:d:h",
-            ["log=", "directory=", "help"]
+            "l:d:p:h",
+            ["log=", "directory=", "pin=", "help"]
         )
     except getopt.GetoptError as e:
         # We haven't instantiated LOG yet so default to basic print
@@ -96,7 +96,7 @@ def parseArgs(argv):
             except:
                 print USAGE
                 sys.exit(-1)
-            if not togugpio.isValidPin(pin):
+            if not tofugpio.isValidPin(pin):
                 print USAGE
                 sys.exit(-1)
             DEFAULT_PIN = pin
@@ -115,19 +115,23 @@ def main(argv):
         LOG.error("Failed to find audio files")
         return
 
-    player = tofuaudio.TofuAudioPlayer(musicList)
+    player = tofuaudio.TofuAudioPlayer(musicList, MUSIC_DIR)
     if not player:
         LOG.error("Failed to instantiate an audio player")
         return
 
+    def pinCallback(pin):
+        LOG.debug("GPIO I/O callback fired")
+        player.playRandom()
+
     LOG.info("Using pin [ {0} ] for input".format(DEFAULT_PIN))
-    tofugpio.setupPin(DEFAULT_PIN, player.playRandom)
+    tofugpio.setupPin(DEFAULT_PIN, pinCallback)
 
     # Release resources gracefully if forcibly killed
     def signalHandler(signal, frame):
         print "Caught signal ({0}), exiting ...".format(signal)
         tofugpio.closeAllPins()
-        player.stop()
+        player.closeAudio()
         sys.exit(0)
     signal.signal(signal.SIGINT, signalHandler)
     signal.signal(signal.SIGQUIT, signalHandler)
