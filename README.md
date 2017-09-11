@@ -6,7 +6,8 @@ I opted for a Raspberry Pi as it has the requisite GPIO inputs, a dedicated stan
 
 ## Hardware Components
 
-
+* Raspberry Pi 2/3
+* Some kind of doorsensor which translates to a logical switch (high/low voltage). For testing I used a simple [door mounted reed switch.](https://www.amazon.com/gp/product/B00HR8CT8E)
 
 ## Software Components
 
@@ -17,3 +18,6 @@ The software requirements can be satisfied by creting two simple services which 
 
 ## Requirements
 
+* NodeJS 
+* Python
+* python-pigpio
