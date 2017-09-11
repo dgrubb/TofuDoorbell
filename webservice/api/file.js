@@ -59,5 +59,7 @@ router.get("/getlist", function(req, res, next) {
  */
 router.get("/delete", function(req, res, next) {
     log.debug("GET /api/file/delete");
+
 });
 
+module.exports = router;

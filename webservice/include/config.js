@@ -3,7 +3,7 @@ module.exports = {
         name: "Tofu WebService",
         version: "0.0.1"
     },
-    logLevel: "verbose",
+    logLevel: "debug",
     httpPort: 80,
     audioSamplesPath: "/opt/tofu/doorbell/samples"
 };

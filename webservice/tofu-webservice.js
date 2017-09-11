@@ -20,6 +20,10 @@ var path = require("path");
 var serveStatic = require("serve-static");
 var _ = require("underscore");
 
+// Local modules
+var log = require(path.resolve(__dirname, "include", "log"));
+var config = require(path.resolve(__dirname, "include", "config"));
+
 // Definitions
 var app = express();
 app.use(bodyParser.json());

@@ -61,3 +61,4 @@ router.get("/restart_service", function(req, res, next) {
     });
 });
 
+module.exports = router;
