@@ -6,13 +6,18 @@ when it detects that a door has been opened.
 ## Hardware
 
 1. Raspberry Pi B+, 2, 3 etc.
-2. Door mounted [reed switch.](ttps://www.amazon.com/gp/product/B00HR8CT8E)
+2. Door mounted [reed switch.](https://www.amazon.com/gp/product/B00HR8CT8E)
 
 ## Software requirements
 
 1. Raspbian
 2. Python
 3. python-pigpio
+4. mplayer
+
+```
+$ sudo apt-get install python-pigpio mplayer
+```
 
 ## Installation
 
