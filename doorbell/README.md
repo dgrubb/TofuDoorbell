@@ -19,6 +19,29 @@ when it detects that a door has been opened.
 $ sudo apt-get install python-pigpio mplayer
 ```
 
+## Usage
+
+```
+    $ ./tofu-doorbell.py -l <logging level> -d <audio directory>
+   
+    -l, --log            Log level, options:
+                            debug
+                            info
+                            warning
+                            error
+                            critical
+                            
+    -d, --directory     Directory where audio samples are stored. Relative
+                        and absolute paths are valid, e.g.,:
+                            -d ./music
+                            -d /opt/somedir/audio
+                            
+    -p, --pin           Pin to use as input signal source (Default: 32)
+    
+    -h, --help          Print usage.
+
+```
+
 ## Installation
 
 Run the build.sh script under ./build to create an installable .deb 
