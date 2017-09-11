@@ -6,14 +6,13 @@ when it detects that a door has been opened.
 ## Hardware
 
 1. Raspberry Pi B+, 2, 3 etc.
-2. Sharp GP2Y0A21YK0F proximity sensor.
-3. MCP3008 SPI based ADC.
+2. Door mounted [reed switch.](ttps://www.amazon.com/gp/product/B00HR8CT8E)
 
 ## Software requirements
 
 1. Raspbian
 2. Python
-3. python-spidev
+3. python-pigpio
 
 ## Installation
 
