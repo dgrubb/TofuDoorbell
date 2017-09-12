@@ -12,6 +12,7 @@ var fs = require("fs");
 var express = require("express");
 var path = require("path");
 var httpCodes = require("http-codes");
+var formidable = require("formidable");
 
 // Variables
 var parentDir = path.resolve(__dirname, "..");
@@ -82,6 +83,23 @@ router.post("/delete", function(req, res, next) {
         }
     });
     return res.status(httpCodes.OK).send("Success");
+});
+
+
+router.post("/upload", function(req, res, next) {
+    log.debug("GET /api/file/upload");
+    var form = new formidable.IncomingForm();
+    form.parse(req, function(err, fields, files) {
+        var tmpPath = files.fileUpload.path;
+        var uploadPath = path.resolve(config.audioSamplesPath, files.fileUpload.name);
+        fs.rename(tmpPath, uploadPath, function(err) {
+            if (err) {
+                log.error("Error uploading file: " + err);
+                return res.status(httpCodes.INTERNAL_SERVER_ERROR).send(err);
+            }
+            return res.status(httpCodes.OK).send("Success");
+        });
+    });
 });
 
 module.exports = router;
