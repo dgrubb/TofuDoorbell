@@ -8,6 +8,7 @@
     <!-- Third party JavaScript -->
     <script type="text/javascript" src="./js/third-party/jquery-3.1.1.js"></script>
     <script type="text/javascript" src="./js/third-party/bootstrap.js"></script>
+    <script type="text/javascript" src="./js/third-party/underscore.js"></script>
     <!-- Application Javascript -->
     <script type="text/javascript" src="./js/network.js"></script>
     <script type="text/javascript" src="./js/api.js"></script>
@@ -46,8 +47,11 @@
         <div id="file_list_title" class="file-list-title">
             Installed audio samples:
         </div>
+        <br>
         <table id="file_list_table" class="table-responsive table-bordered file-list-table">
         </table>
+        <br>
+        <button type="delete" id="submit_delete" class="btn btn-primary">Delete selected</button>
     </div>
 
     <!--

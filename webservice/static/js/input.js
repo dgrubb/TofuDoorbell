@@ -22,3 +22,18 @@ $("#restart_service").click(function(event) {
     });
 });
 
+$("#submit_delete").click(function(event) {
+    console.log("Deleting files");
+    var files = Content.getItemsMarkedForDeletion();
+    if (!files || !files.length) {
+        console.error("No file list retrieved");
+        return false;
+    }
+    API.deleteAudioFiles(files, function(resp, status) {
+        if (!API.validateResponse(resp, status)) {
+            // TODO: handle error case
+            return false;
+        }
+        Content.populateContent();
+    });
+});

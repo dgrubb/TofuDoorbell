@@ -8,6 +8,6 @@
  */
 
 $(document).ready(function() {
-    // Start here
+    Content.populateContent();
 });
 

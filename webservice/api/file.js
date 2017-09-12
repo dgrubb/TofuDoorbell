@@ -43,7 +43,7 @@ router.get("/getlist", function(req, res, next) {
         }
         for (var i in list) {
             if (path.extname(list[i]) === ".mp3") {
-                files.append(list[i]);
+                files.push(list[i]);
             }
         }
         return res.status(httpCodes.OK).send(files);
@@ -57,9 +57,25 @@ router.get("/getlist", function(req, res, next) {
  *
  * /api/file/delete
  */
-router.get("/delete", function(req, res, next) {
+router.post("/delete", function(req, res, next) {
     log.debug("GET /api/file/delete");
-
+    if (!req.body || !req.body.files || !Array.isArray(req.body.files)) {
+        log.error("Delete requested without file arguments");
+        return res.status(httpCodes.BAD_REQUEST).send("No files specified");
+    }
+    req.body.files.forEach(function(file, idx) {
+        var filePath = "";
+        try {
+            filePath = path.resolve(config.audioSamplesPath, file);
+            if (filePath) {
+                log.debug("Deleting: " + filePath);
+                fs.unlinkSync(filePath);
+            }
+        } catch (e) {
+            log.error("Error [" + e + "] deleting file: " + filePath);
+        }
+    });
+    return res.status(httpCodes.OK).send("Success");
 });
 
 module.exports = router;

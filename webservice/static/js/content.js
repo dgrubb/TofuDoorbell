@@ -19,7 +19,7 @@ var Content = (function() {
     var deleteItems = [];
 
     function populateContent() {
-        API.getAudiolist(function(resp, status) {
+        API.getAudioList(function(resp, status) {
             if (!API.validateResponse(resp, status)) {
                 // TODO: handle error case
                 return false;
@@ -28,7 +28,8 @@ var Content = (function() {
                 // These are not the droids we're looking for
                 return false;
             }
-
+            deleteItems = [];
+            drawTable(resp.responseJSON);
         });
     }
 
@@ -46,14 +47,14 @@ var Content = (function() {
         });
     }
 
-    function newAudioTableEntry(audioItem, idx) {
+    function newAudioTableEntry(item, idx) {
         var $audioItem = $("<tr>");
         $audioItem.append($("<td>").text(idx));
-        $audioItem.append($("<td>").text(item.fileName));
-        $audioItem.append($("td")
+        $audioItem.append($("<td>").text(item));
+        $audioItem.append($("<td>")
             .append($(
                 "<input type=\"checkbox\" id=\"check_" +
-                item.fileName +
+                item +
                 "\"></input>"
             ).change(function() {
                 Content.markForDeletion(
@@ -70,7 +71,7 @@ var Content = (function() {
             if (deleteItems.includes(fileName)) {
                 return;
             }
-            deleteItems.append(fileName);
+            deleteItems.push(fileName);
         } else {
             deleteItems = _.without(deleteItems, fileName);
         }

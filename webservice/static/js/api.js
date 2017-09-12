@@ -10,7 +10,7 @@ var API = (function() {
     'use strict';
 
     function deleteAudioFiles(files, callback) {
-        Network.get(
+        Network.post(
             "/api/file/delete",
             {
                 files: files
