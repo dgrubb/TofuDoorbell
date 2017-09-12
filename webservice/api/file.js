@@ -65,6 +65,12 @@ router.post("/delete", function(req, res, next) {
     }
     req.body.files.forEach(function(file, idx) {
         var filePath = "";
+        if (file[0] === "/" || file.search(/../g)) {
+            // Somebody is attempting to change our directory path by inserting
+            // either root or a relative path. Naughty.
+            log.error("Bad behaviour detected");
+            return;
+        }
         try {
             filePath = path.resolve(config.audioSamplesPath, file);
             if (filePath) {
