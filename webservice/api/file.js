@@ -52,11 +52,11 @@ router.get("/getlist", function(req, res, next) {
 });
 
 /**
- * Deletes specified audio samples.
+ * Uploads an audio sample.
  *
  * GET
  *
- * /api/file/delete
+ * /api/file/upload
  */
 router.post("/delete", function(req, res, next) {
     log.debug("GET /api/file/delete");
@@ -85,7 +85,13 @@ router.post("/delete", function(req, res, next) {
     return res.status(httpCodes.OK).send("Success");
 });
 
-
+/**
+ * Uploads an audio sample.
+ *
+ * GET
+ *
+ * /api/file/upload
+ */
 router.post("/upload", function(req, res, next) {
     log.debug("GET /api/file/upload");
     var form = new formidable.IncomingForm();
