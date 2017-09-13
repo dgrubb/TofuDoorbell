@@ -1,6 +1,6 @@
 # TofuDoorbell
 
-This project was requested by a friend who owns a novelty-themed shop, [Tofu Cute](https://www.tofucute.com/), and wants to play an audio clip whenever a customer enters the premises. The implicit requirements are that a computing platform should support audio playback (or trigger audio playback on an external device) and be able to detect input from a physical switching device which can be mounted to a door. Naturally, an Arduino or Raspberry Pi level device spring to mind immediately. 
+This project was requested by a friend who owns a speciality shop, [Tofu Cute](https://www.tofucute.com/), and wants to play an audio clip whenever a customer enters the premises. The implicit requirements are that a computing platform should support audio playback (or trigger audio playback on an external device) and be able to detect input from a physical switching device which can be mounted to a door. Naturally, an Arduino or Raspberry Pi level device spring to mind immediately. 
 
 I opted for a Raspberry Pi as it has the requisite GPIO inputs, a dedicated standard 3.5mm audio output jack (whatever Apple Inc says), and can support a complete OS to take care of file I/O and supply a networking stack. The latter allows for me to make the management experience more pleasant by adding a small webservice to the device which can manage the audio clips and allow them to be swapped out, even though the device will probably be installed headless.
 
