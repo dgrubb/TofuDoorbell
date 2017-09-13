@@ -16,6 +16,9 @@ The software requirements can be satisfied by creting two simple services which 
 * doorbell: a Python script which monitors the GPIO for activity and plays back audio according to input triggers. 
 * webservice: a NodeJS application which serves up a web-interface for deleting clips and uploading new ones. 
 
+![Tofu Webservice screenshot](./webservice/images/Tofu-webservice-screenshot-small.png?raw=true "Tofu Webservice screenshot")
+
+
 ## Requirements
 
 * NodeJS 
