@@ -26,9 +26,6 @@ module.exports = new (winston.Logger)({
                     (options.meta && Object.keys(options.meta).length ?
                     '\n\t' + JSON.stringify(options.meta) :
                     '');
-            },
-            padRight: function(str, padStr) {
-                return (str + padStr).substring(0, padStr.length);
             }
         })
     ]
