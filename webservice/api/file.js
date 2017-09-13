@@ -97,7 +97,7 @@ router.post("/upload", function(req, res, next) {
                 log.error("Error uploading file: " + err);
                 return res.status(httpCodes.INTERNAL_SERVER_ERROR).send(err);
             }
-            return res.status(httpCodes.OK).send("Success");
+            return res.redirect(req.get("referer"));
         });
     });
 });
