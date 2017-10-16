@@ -21,7 +21,7 @@ readonly VERSION="$MAJOR_VERSION.$MINOR_VERSION.$PACKAGE_VERSION"
 # Build configurations
 readonly STAGING_DIR=`pwd`
 readonly BUILD_DIR="$STAGING_DIR/${PROJECT}_${VERSION}" # Equivalent to / on target
-readonly INSTALL_DIR="$BUILD_DIR/opt/tofu"
+readonly INSTALL_DIR="$BUILD_DIR/opt/tofu/doorbell"
 readonly CONTROL_INSTALL_DIR="$BUILD_DIR/DEBIAN"
 
 # Build files
