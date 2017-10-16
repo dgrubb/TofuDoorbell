@@ -1,0 +1,11 @@
+Description= Tofu Web Service
+
+[Service]
+ExecStart=/usr/bin/node /opt/tofu/webservice/tofu-webservice.js
+ExecStop=/usr/bin/pkill -f tofu-webservice.py
+WorkingDirectory=/opt/tofu/webservice
+Restart=always
+
+[Install]
+WantedBy=default.target
+
